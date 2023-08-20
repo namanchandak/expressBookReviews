@@ -37,27 +37,80 @@ public_users.post("/register", (req,res) => {
 
 
 
+let myPromise = new Promise((resolve,reject) => {
+  setTimeout(() => {
+    resolve("Resolved value");
+  },6000)})
+
+
+
 
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
   //Write your code here
   // console.log("/")
-  res.send(JSON.stringify(books,null,4))
+
+  myPromise
+  .then( (resolvedValue) =>{
+    console.log("/")
+    res.send(JSON.stringify(books,null,4))
+
+  } )
+
+  .catch((error) => {
+    console.error("Error:", error);
+      res.status(500).json({ message: "An error occurred" });
+
+  })
+
+
+  
   // return res.status(300).json({message: "Here is the book list"});
 });
+
+
+
+
+
+
+
+
 
 // Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
   //Write your code here
-  let bookD=req.params.isbn
-  res.send(books[bookD])
+
+
+  myPromise
+  .then((resolvedValue) => {
+    let bookD=req.params.isbn
+    res.send(books[bookD])
+
+  })
+
+  .catch((error) => {
+    console.error("Error:", error);
+      res.status(500).json({ message: "An error occurred" });
+
+  })
+
+  
   // return res.status(300).json({message: "Yet to be implemented"});
  });
   
+
+
+
+
+
+
 // Get book details based on author
 public_users.get('/author/:author',function (req, res) {
   //Write your code here
-  let auth = req.params.author
+
+  myPromise
+  .then((resolvedValue) =>{
+    let auth = req.params.author
 
   let det = Object.values(books).filter( (books) => books.author === auth ) 
   if(det.length>0)
@@ -68,6 +121,17 @@ public_users.get('/author/:author',function (req, res) {
   {
     res.send( {message : "book not found"} )
   }
+
+  })
+  
+  .catch((error) => {
+    console.error("Error:", error);
+      res.status(500).json({ message: "book not found" });
+
+  })
+
+
+  
   // return res.status(300).json({message: "Yet to be implemented"});
 });
 
