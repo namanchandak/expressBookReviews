@@ -133,4 +133,54 @@ public_users.post("/login", (req,res) => {
   }
 });
 
+
+
+public_users.put("/auth/review/:isbn", (req, res) => {
+  //Write your code here
+  
+  let isb=req.params.isbn
+  // // 
+  
+  let book=books[isb]
+  // console.log(isbook)
+  // let ne=req.params.delete
+  if(book)
+  {
+    let next = req.body.reviews
+    books[isb].reviews= next
+    // rev.push(next)
+    // books[isb].reviews = rev;
+
+    res.send( books[isb] )
+    
+  }
+  else 
+  {
+    res.send( {message : "book not exist"} )
+  }
+
+  // return res.status(300).json({message: "Yet to be implemented"});
+});
+
+
+
+public_users.delete("/auth/review/:isbn", (req, res) => 
+{
+  let del = req.params.isbn
+
+  if(books[del])
+  {
+    delete books[del].reviews
+    res.send( {message : "book review deleted"} )
+  }
+  else
+  { 
+    res.send( {message : "book not exist"} )
+
+  } 
+
+})
+
+
+
 module.exports.general = public_users;
