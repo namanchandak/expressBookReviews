@@ -37,7 +37,7 @@ const authenticatedUser = (username,password)=>{ //returns boolean
   return false;
 }
 
-public_users.post("/login", (req,res) => {
+regd_users.post("/login", (req,res) => {
 
   let usr = req.body.username 
   let pass = req.body.password
@@ -67,7 +67,7 @@ public_users.post("/login", (req,res) => {
 
 
 
-public_users.put("/auth/review/:isbn", (req, res) => {
+regd_users.put("/auth/review/:isbn", (req, res) => {
   //Write your code here
   
   let isb=req.params.isbn
@@ -96,7 +96,7 @@ public_users.put("/auth/review/:isbn", (req, res) => {
 
 
 
-public_users.delete("/auth/review/:isbn", (req, res) => 
+regd_users.delete("/auth/review/:isbn", (req, res) => 
 {
   let del = req.params.isbn
 
